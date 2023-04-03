@@ -14,7 +14,7 @@
     <a href="#"><span class="oval">profile</span></a>
 </div>
 <style>
-    /* Define the styles for the ovals */
+
     .oval {
         display: block;
         width: 60px;
@@ -28,16 +28,16 @@
         margin-bottom: 10px;
         transition: all 0.2s ease-in-out;
     }
-    /* Change the oval shape */
+
     .oval {
         border-radius: 20px / 50%;
     }
-    /* Change the oval color on hover */
+
     .oval:hover {
         background-color: #000b54;
         cursor: pointer;
     }
-    /* Define the styles for the sidebar container */
+
     .sidebar {
         position: fixed;
         top: 50%;
@@ -46,10 +46,10 @@
         padding: 20px;
         background-color: white;
         box-shadow: 2px 2px 10px rgba(1, 1, 122);, 1 ;
-        display: flex; /* make it a flex container */
-        flex-direction: column; /* set the direction to column */
+        display: flex;
+        flex-direction: column;
     }
-    /* Define the styles for the links */
+
     .sidebar a {
         display: block;
         margin-bottom: 10px;
