@@ -1,3 +1,7 @@
+
+<?php
+session_start();
+?>
 <head>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,10 +16,17 @@
 </form>
 <div class="sidebar">
     <a href="../code/logo.html"><span class="oval">home</span></a><br>
-    <a href="#"><span class="oval">2</span></a><br>
-    <a href="#"><span class="oval">3</span></a><br>
-    <a href="#"><span class="oval">4</span></a><br>
-    <a href="#"><span class="oval">profile</span></a>
+    <?php
+    if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+        echo '<a href="logout.php"><span class="oval">logout</span></a><br>';
+        echo '<h3>' . $username . '</h3>';
+
+    } else {
+        echo '<a href="login.php"><span class="oval">login</span></a><br>';
+    }
+    ?>
+
 </div>
 
 <?php
@@ -46,3 +57,5 @@ foreach ($data as $item){
     </div>
     <?php
 }
+?>
+

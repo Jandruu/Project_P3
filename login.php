@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,44 +53,40 @@
         }
 
         .error-message {
-            color: red;
+            color: #F9B4F6;
             margin-top: 10px;
+            font-size: 25px;
         }
         .success-message{
             color: #000b54;
             margin-top: 10px;
+            font-size: 25px
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <form class="login-form" method="post" action="">
+    <form class="login-form" method="post" action="login.php">
         <?php
-
         include_once "databaseconectie.php";
+
         global $dbConnectie;
 
         if (isset($_POST['inloggen'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $query = $dbConnectie->prepare(
-                "SELECT * FROM profiel WHERE username = :user"
-            );
+            $query = $dbConnectie->prepare("SELECT * FROM profiel WHERE username = :user AND password = :pass");
             $query->bindParam(":user", $username);
+            $query->bindParam(":pass", $password);
             $query->execute();
 
             if ($query->rowCount() > 0) {
-                echo '<p class="error-message">Gebruikersnaam bestaat al!</p>';
+                $_SESSION['username'] = $username; // add username to session
+                header("Location: post.php"); // redirect to post page
+                exit;
             } else {
-                $insertQuery = $dbConnectie->prepare(
-                    "INSERT INTO profiel (username, password) VALUES (:user, :pass)"
-                );
-                $insertQuery->bindParam(":user", $username);
-                $insertQuery->bindParam(":pass", $password);
-                $insertQuery->execute();
-
-                echo '<p class="success-message">Gebruiker toegevoegd!</p>';
+                echo '<p class="error-message">Inloggegevens zijn onjuist!</p>';
             }
         }
         ?>

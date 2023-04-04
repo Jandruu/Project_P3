@@ -12,4 +12,3 @@ try {
     die("Error!: " . $e->getMessage());
 }
 
-//$dbConnectie
