@@ -1,9 +1,8 @@
-
 <?php
 session_start();
 ?>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="post.css">
 </head>
 
 <img src="../afbeeldingen/twotter.png" alt="Logo" style="position: absolute; top: 20px; left: 20px; width: 200px; height: 200px;">
@@ -24,6 +23,7 @@ session_start();
 
     } else {
         echo '<a href="login.php"><span class="oval">login</span></a><br>';
+        echo '<a href="register.php"><span class="oval">register</span></a><br>';
     }
     ?>
 
@@ -35,27 +35,27 @@ include_once "databaseconectie.php";
 global $dbConnectie;
 
 if(isset($_POST["submit"])){
-    $query = $dbConnectie->prepare(
-        "INSERT INTO tweets (titel, inhoud)
-                    VALUES (:placeholderTitel, :phInhoud);");
+    $query = $dbConnectie->prepare("
+    INSERT INTO tweets (titel, inhoud, user_id)
+    SELECT :placeholderTitel, :phInhoud, id
+    FROM profiel
+    WHERE username = :phUsername
+");
     $query->execute([
         "placeholderTitel" => $_POST["titelInput"],
-        "phInhoud" => $_POST["tweetInput"]
+        "phInhoud" => $_POST["tweetInput"],
+        "phUsername" => $_SESSION['username']
     ]);
-}
 
-$voorbereideQuery = $dbConnectie->prepare("SELECT * FROM tweets;");
+$voorbereideQuery = $dbConnectie->prepare("SELECT *, (SELECT username FROM profiel WHERE id = tweets.user_id) AS username FROM tweets;");
 $voorbereideQuery->execute([]);
 $data = $voorbereideQuery->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($data as $item){
     ?>
-
     <div class="DeTweet">
-        user: <?php echo $item["titel"]?><br>
+        Gebruiker: <?php echo $item["username"]?><br>
         Tekst: <?php echo $item["inhoud"]?><br><br>
-    </div>
-    <?php
-}
-?>
 
+    </div>
+<?php }}
