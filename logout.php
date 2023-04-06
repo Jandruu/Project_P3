@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_destroy();
-header("Location: post.php");
+header("Location: home.php");
 exit;
 ?>
 

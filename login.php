@@ -26,7 +26,7 @@ session_start();
 
             if ($query->rowCount() > 0) {
                 $_SESSION['username'] = $username;
-                header("Location: post.php");
+                header("Location: home.php");
                 exit;
             } else {
                 echo '<p class="error-message">Inloggegevens zijn onjuist!</p>';

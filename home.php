@@ -2,12 +2,13 @@
 session_start();
 ?>
 <head>
-    <link rel="stylesheet" href="post.css">
+    <title>home</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 
 <img src="../afbeeldingen/twotter.png" alt="Logo" style="position: absolute; top: 20px; left: 20px; width: 200px; height: 200px;">
 <form method="POST" class="tweetten">
-    tweet:<input type="text" name="tweetInput">
+    <input type="text" name="tweetInput">
     <br><br>
     <input type="submit" name="submit">
 </form>
@@ -41,15 +42,19 @@ if(isset($_SESSION['username'])){
 
     foreach ($data as $item){
         ?>
-        <div class="DeTweet">
-            Gebruiker: <?php echo $item["username"]?><br>
-            Tekst: <?php echo $item["inhoud"]?><br>
+        <div class="tweet-container">
+            <div class="DeTweet">
+                <?php echo $item["username"]?><br>
+                <?php echo $item["inhoud"]?><br>
+                <br>
+            </div>
+            <div>
             <?php
             if ($_SESSION['username'] == $item["username"]) {
-                echo '<form method="POST"><button type="submit" name="delete" value="' . $item["id"] . '">Verwijder</button></form>';
+                echo '<form method="POST"><button type="submit" name="delete" value="' . $item["id"] . '" class="delete-btn">delete</button></form>';
             }
             ?>
-            <br>
+        </div>
         </div>
         <?php
     }

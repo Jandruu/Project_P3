@@ -53,7 +53,7 @@ $profiel = $query->fetch(PDO::FETCH_ASSOC);
             <input type="submit" name="submit" value="Save changes">
         </div>
         <div class="link-container">
-            <a href="post.php">back</a>
+            <a href="home.php">back</a>
         </div>
         <div style="clear: both;"></div>
     </form>
