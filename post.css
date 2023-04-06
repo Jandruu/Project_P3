@@ -3,6 +3,14 @@
     width: 50%;
     text-align: center;
     margin-bottom: 20px;
+    position: fixed;
+}
+.logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 200px;
 }
 div{
     display: flex;
